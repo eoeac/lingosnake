@@ -11,6 +11,33 @@ const requiredFiles = [
   "src/data/generated/materials.js",
 ];
 
+const obsoletePaths = [
+  "index.html",
+  "app.js",
+  "styles.css",
+  "scheduler.js",
+  "scheduler.mjs",
+  "quiz.js",
+  "quiz.mjs",
+  "word-order.js",
+  "word-order.mjs",
+  "word-forms.js",
+  "word-forms.mjs",
+  "progress-export.js",
+  "progress-export.mjs",
+  "wrong-export.js",
+  "wrong-export.mjs",
+  "session-lock.js",
+  "session-lock.mjs",
+  "miniprogram",
+  "preview",
+  "CLAUDE.md",
+];
+
+for (const relativePath of obsoletePaths) {
+  assert.equal(existsSync(resolve(rootDir, relativePath)), false, `${relativePath} should be removed`);
+}
+
 for (const relativePath of requiredFiles) {
   const filePath = resolve(rootDir, relativePath);
   assert.equal(existsSync(filePath), true, `${relativePath} must exist`);

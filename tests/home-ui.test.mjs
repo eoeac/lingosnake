@@ -6,8 +6,6 @@ const miniHomeCss = readFileSync(new URL("../src/pages/home/home.wxss", import.m
 const quizWxml = readFileSync(new URL("../src/pages/quiz/quiz.wxml", import.meta.url), "utf8");
 const quizCss = readFileSync(new URL("../src/pages/quiz/quiz.wxss", import.meta.url), "utf8");
 const quizJs = readFileSync(new URL("../src/pages/quiz/quiz.js", import.meta.url), "utf8");
-const webHome = readFileSync(new URL("../index.html", import.meta.url), "utf8");
-const webApp = readFileSync(new URL("../app.js", import.meta.url), "utf8");
 const appJson = JSON.parse(readFileSync(new URL("../src/app.json", import.meta.url), "utf8"));
 const miniHomeJs = readFileSync(new URL("../src/pages/home/home.js", import.meta.url), "utf8");
 const appCss = readFileSync(new URL("../src/app.wxss", import.meta.url), "utf8");
@@ -53,16 +51,6 @@ const completeWxml = readFileSync(new URL("../src/pages/complete/complete.wxml",
     assert.ok(normal.size > 4000, `${iconName} tabbar icon should use the richer generated artwork`);
     assert.ok(active.size > 4000, `${iconName} active tabbar icon should use the richer generated artwork`);
   }
-}
-
-{
-  const heroIndex = webHome.indexOf('class="panel today-panel home-section hero-card"');
-  const settingsIndex = webHome.indexOf('class="panel settings-panel home-section settings-drawer"');
-  assert.ok(heroIndex !== -1, "web home should render a first-screen learning hero");
-  assert.ok(settingsIndex !== -1, "web settings should be moved into a drawer-like panel");
-  assert.ok(heroIndex < settingsIndex, "web learning hero should appear before settings drawer");
-  assert.match(webApp, /learnedPanel\.hidden = currentView !== PAGE_VIEWS\.LEARNED/, "web home should not duplicate learned tab content");
-  assert.match(webApp, /wrongPanel\.hidden = currentView !== PAGE_VIEWS\.WRONG/, "web home should not duplicate wrong tab content");
 }
 
 {
