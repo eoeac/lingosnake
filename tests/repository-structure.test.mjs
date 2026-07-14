@@ -66,6 +66,25 @@ assert.match(workflowSource, /permissions:\s*\r?\n\s+contents:\s*read/);
 assert.match(workflowSource, /node-version:\s*["']?22["']?/);
 assert.match(workflowSource, /npm run check/);
 
+const readmeEn = readFileSync(resolve(rootDir, "README.md"), "utf8");
+const readmeZh = readFileSync(resolve(rootDir, "README.zh-CN.md"), "utf8");
+for (const [name, content] of [["README.md", readmeEn], ["README.zh-CN.md", readmeZh]]) {
+  assert.match(content, /README\.zh-CN\.md|README\.md/, `${name} should link to the other language`);
+  assert.match(content, /npm run prepare/, `${name} should document data preparation`);
+  assert.match(content, /npm run check/, `${name} should document verification`);
+  assert.match(content, /touristappid/, `${name} should document the public AppID`);
+  assert.match(content, /private\/vocabulary/, `${name} should document private vocabulary storage`);
+  assert.match(content, /MIT/, `${name} should document the license`);
+  assert.match(content, /Taro/, `${name} should document the multi-platform direction`);
+  assert.doesNotMatch(content, /wxe0ec80f15422470d|上海初中英语/, `${name} should not expose private project data`);
+}
+
+for (const imageName of ["home.png", "quiz.png"]) {
+  const image = readFileSync(resolve(rootDir, "docs/images", imageName));
+  assert.ok(image.length > 10000, `${imageName} should be a non-trivial screenshot`);
+  assert.deepEqual([...image.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${imageName} should be PNG`);
+}
+
 function collectJavaScriptFiles(directoryPath) {
   return readdirSync(directoryPath, { withFileTypes: true }).flatMap((entry) => {
     const entryPath = resolve(directoryPath, entry.name);
