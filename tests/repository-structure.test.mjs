@@ -22,6 +22,23 @@ assert.match(materialSource, /\.\.\/data\/generated\/materials/);
 assert.doesNotMatch(materialSource, /上海初中英语/);
 assert.doesNotMatch(materialSource, /vocab-data/);
 
+const projectConfig = JSON.parse(readFileSync(resolve(rootDir, "project.config.json"), "utf8"));
+assert.equal(projectConfig.miniprogramRoot, "src/");
+assert.equal(projectConfig.appid, "touristappid");
+assert.equal(projectConfig.projectname, "lingosnake");
+
+const packageJson = JSON.parse(readFileSync(resolve(rootDir, "package.json"), "utf8"));
+assert.equal(packageJson.dependencies, undefined);
+assert.equal(packageJson.devDependencies, undefined);
+assert.equal(typeof packageJson.scripts.prepare, "string");
+assert.equal(typeof packageJson.scripts.test, "string");
+assert.equal(typeof packageJson.scripts.check, "string");
+
+const workflowSource = readFileSync(resolve(rootDir, ".github/workflows/ci.yml"), "utf8");
+assert.match(workflowSource, /permissions:\s*\r?\n\s+contents:\s*read/);
+assert.match(workflowSource, /node-version:\s*["']?22["']?/);
+assert.match(workflowSource, /npm run check/);
+
 function collectJavaScriptFiles(directoryPath) {
   return readdirSync(directoryPath, { withFileTypes: true }).flatMap((entry) => {
     const entryPath = resolve(directoryPath, entry.name);

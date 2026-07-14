@@ -1,0 +1,30 @@
+{
+  "description": "LingoSnake - playful spaced-repetition vocabulary trainer",
+  "miniprogramRoot": "src/",
+  "compileType": "miniprogram",
+  "libVersion": "3.16.1",
+  "appid": "touristappid",
+  "projectname": "lingosnake",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "bundle": false,
+    "urlCheck": true,
+    "es6": false,
+    "postcss": true,
+    "minified": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "nodeModules": false,
+    "enhance": true,
+    "useIsolateContext": true,
+    "uploadWithSourceMap": true
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
+}

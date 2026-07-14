@@ -1,0 +1,13 @@
+{
+  "name": "lingosnake",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A playful spaced-repetition vocabulary trainer for WeChat Mini Program.",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "prepare": "node scripts/prepare-data.mjs",
+    "test": "node tests/prepare-data.test.mjs && node tests/scheduler.test.mjs && node tests/quiz.test.mjs && node tests/order.test.mjs && node tests/word-forms.test.mjs && node tests/progress-export.test.mjs && node tests/wrong-export.test.mjs && node tests/session-lock.test.mjs && node tests/home-ui.test.mjs && node tests/repository-structure.test.mjs",
+    "check": "npm run prepare && node scripts/check-js.mjs && npm test"
+  }
+}
