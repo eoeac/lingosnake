@@ -37,7 +37,7 @@ LingoSnake 的中文名称是 **小蛇欢乐屋**。它把每天的单词复习�
 ### 运行小程序
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/lingosnake.git
+git clone https://github.com/eoeac/lingosnake.git
 cd lingosnake
 npm run prepare
 ```

@@ -37,7 +37,7 @@ The screenshots use the public sample vocabulary. No private curriculum data or 
 ### Run the Mini Program
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/lingosnake.git
+git clone https://github.com/eoeac/lingosnake.git
 cd lingosnake
 npm run prepare
 ```
