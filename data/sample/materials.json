@@ -1,0 +1,123 @@
+[
+  {
+    "id": "lingosnake-starter",
+    "name": "LingoSnake Starter Words",
+    "words": [
+      {
+        "id": "starter-amber",
+        "index": 1,
+        "word": "amber",
+        "phonetic": "/ˈæmbə(r)/",
+        "unit": 1,
+        "page": 1,
+        "meanings": [{ "pos": "n.", "zh": "琥珀；琥珀色" }],
+        "wordForms": "amber adj. 琥珀色的"
+      },
+      {
+        "id": "starter-brave",
+        "index": 2,
+        "word": "brave",
+        "phonetic": "/breɪv/",
+        "unit": 1,
+        "page": 1,
+        "meanings": [{ "pos": "adj.", "zh": "勇敢的" }, { "pos": "v.", "zh": "勇敢面对" }],
+        "wordForms": "bravely adv. 勇敢地 bravery n. 勇敢"
+      },
+      {
+        "id": "starter-curious",
+        "index": 3,
+        "word": "curious",
+        "phonetic": "/ˈkjʊəriəs/",
+        "unit": 1,
+        "page": 2,
+        "meanings": [{ "pos": "adj.", "zh": "好奇的" }],
+        "wordForms": "curiously adv. 好奇地 curiosity n. 好奇心"
+      },
+      {
+        "id": "starter-drift",
+        "index": 4,
+        "word": "drift",
+        "phonetic": "/drɪft/",
+        "unit": 1,
+        "page": 2,
+        "meanings": [{ "pos": "v.", "zh": "漂流；逐渐移动" }, { "pos": "n.", "zh": "漂流" }]
+      },
+      {
+        "id": "starter-eager",
+        "index": 5,
+        "word": "eager",
+        "phonetic": "/ˈiːɡə(r)/",
+        "unit": 1,
+        "page": 3,
+        "meanings": [{ "pos": "adj.", "zh": "渴望的；热切的" }],
+        "wordForms": "eagerly adv. 热切地 eagerness n. 热切"
+      },
+      {
+        "id": "starter-fluent",
+        "index": 6,
+        "word": "fluent",
+        "phonetic": "/ˈfluːənt/",
+        "unit": 2,
+        "page": 4,
+        "meanings": [{ "pos": "adj.", "zh": "流利的" }],
+        "wordForms": "fluently adv. 流利地 fluency n. 流利"
+      },
+      {
+        "id": "starter-gather",
+        "index": 7,
+        "word": "gather",
+        "phonetic": "/ˈɡæðə(r)/",
+        "unit": 2,
+        "page": 4,
+        "meanings": [{ "pos": "v.", "zh": "聚集；收集" }]
+      },
+      {
+        "id": "starter-horizon",
+        "index": 8,
+        "word": "horizon",
+        "phonetic": "/həˈraɪzn/",
+        "unit": 2,
+        "page": 5,
+        "meanings": [{ "pos": "n.", "zh": "地平线；眼界" }]
+      },
+      {
+        "id": "starter-invent",
+        "index": 9,
+        "word": "invent",
+        "phonetic": "/ɪnˈvent/",
+        "unit": 2,
+        "page": 5,
+        "meanings": [{ "pos": "v.", "zh": "发明；创造" }],
+        "wordForms": "invention n. 发明 inventor n. 发明者"
+      },
+      {
+        "id": "starter-jolly",
+        "index": 10,
+        "word": "jolly",
+        "phonetic": "/ˈdʒɒli/",
+        "unit": 2,
+        "page": 6,
+        "meanings": [{ "pos": "adj.", "zh": "快乐的；愉快的" }]
+      },
+      {
+        "id": "starter-kindness",
+        "index": 11,
+        "word": "kindness",
+        "phonetic": "/ˈkaɪndnəs/",
+        "unit": 3,
+        "page": 7,
+        "meanings": [{ "pos": "n.", "zh": "善意；友好" }],
+        "wordForms": "kind adj. 友善的 kindly adv. 友善地"
+      },
+      {
+        "id": "starter-lantern",
+        "index": 12,
+        "word": "lantern",
+        "phonetic": "/ˈlæntən/",
+        "unit": 3,
+        "page": 7,
+        "meanings": [{ "pos": "n.", "zh": "灯笼；提灯" }]
+      }
+    ]
+  }
+]

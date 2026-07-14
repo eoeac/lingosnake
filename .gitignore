@@ -1,0 +1,12 @@
+config/local.json
+private/
+src/data/generated/
+project.private.config.json
+.agents/
+.claude/
+.codex/
+.superpowers/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
