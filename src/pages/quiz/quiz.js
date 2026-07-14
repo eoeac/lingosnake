@@ -1,7 +1,7 @@
 // 答题页
 var app = getApp();
-var scheduler = require("../../utils/scheduler");
-var quizUtil = require("../../utils/quiz");
+var scheduler = require("../../core/scheduler");
+var quizUtil = require("../../core/quiz");
 
 Page({
   data: {

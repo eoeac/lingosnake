@@ -1,7 +1,7 @@
 // 材料管理 — 微信小程序版
-var scheduler = require("./scheduler");
-var wordOrder = require("./word-order");
-var wordForms = require("./word-forms");
+var scheduler = require("../core/scheduler");
+var wordOrder = require("../core/word-order");
+var wordForms = require("../core/word-forms");
 var generatedData = require("../data/generated/materials");
 
 var DEFAULT_MATERIAL_ID = (generatedData.materials && generatedData.materials[0] && generatedData.materials[0].id)

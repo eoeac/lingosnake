@@ -1,7 +1,7 @@
 // 错题本页
 var app = getApp();
-var wordForms = require("../../utils/word-forms");
-var wrongExport = require("../../utils/wrong-export");
+var wordForms = require("../../core/word-forms");
+var wrongExport = require("../../core/wrong-export");
 
 Page({
   data: {

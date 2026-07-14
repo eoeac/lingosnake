@@ -1,6 +1,6 @@
 // 学习记录页
 var app = getApp();
-var wordForms = require("../../utils/word-forms");
+var wordForms = require("../../core/word-forms");
 
 Page({
   data: {

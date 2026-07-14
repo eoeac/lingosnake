@@ -1,6 +1,6 @@
 // 完成页
 var app = getApp();
-var scheduler = require("../../utils/scheduler");
+var scheduler = require("../../core/scheduler");
 
 Page({
   data: {

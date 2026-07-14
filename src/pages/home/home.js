@@ -1,11 +1,11 @@
 // 小蛇欢乐屋 — 首页
 var app = getApp();
-var scheduler = require("../../utils/scheduler");
-var quiz = require("../../utils/quiz");
-var wordOrder = require("../../utils/word-order");
-var sessionLock = require("../../utils/session-lock");
+var scheduler = require("../../core/scheduler");
+var quiz = require("../../core/quiz");
+var wordOrder = require("../../core/word-order");
+var sessionLock = require("../../core/session-lock");
 var materialUtil = require("../../utils/material");
-var progressExport = require("../../utils/progress-export");
+var progressExport = require("../../core/progress-export");
 
 Page({
   data: {
