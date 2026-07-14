@@ -1,0 +1,38 @@
+<!-- 答题页 — 答案面板版 -->
+<view class="page-container quiz-page">
+  <view class="quiz-shell">
+    <view class="quiz-topbar">
+      <view class="{{quizStageClass}}">{{quizProgress}}</view>
+      <text class="quiz-type">{{quizType}}</text>
+    </view>
+
+    <view class="progress-bar quiz-progress-bar">
+      <view class="progress-fill" style="width: {{progressPct}}%"></view>
+    </view>
+
+    <view class="prompt-stage">
+      <text class="prompt-text">{{promptText}}</text>
+    </view>
+
+    <view class="answer-panel">
+      <view class="options-grid">
+        <button
+          wx:for="{{options}}"
+          wx:key="index"
+          class="option-btn answer-option {{item.className}}"
+          disabled="{{item.disabled}}"
+          data-index="{{item.index}}"
+          bindtap="onOptionTap"
+        >
+          <text class="option-text">{{item.text}}</text>
+        </button>
+      </view>
+
+      <view wx:if="{{showFeedback}}" class="{{feedbackClass}}">{{feedbackText}}</view>
+
+      <button wx:if="{{showNext}}" class="btn-primary next-question-btn" bindtap="onNext">
+        {{currentNum >= totalNum ? '查看结果' : '下一题'}}
+      </button>
+    </view>
+  </view>
+</view>

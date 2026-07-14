@@ -1,0 +1,145 @@
+<!-- 首页 — 紧凑学习启动版 -->
+<view class="page-container">
+  <view class="hero-card compact-start-card">
+    <view class="compact-main">
+      <view class="compact-copy">
+        <view class="hero-brand">小蛇欢乐屋</view>
+        <view class="hero-date">{{todayLabel}}</view>
+      </view>
+    </view>
+
+    <view class="hero-stats compact-stats">
+      <view class="hero-stat">
+        <view class="hero-stat-value">{{daysStudied}}</view>
+        <view class="hero-stat-label">天</view>
+      </view>
+      <view class="hero-stat">
+        <view class="hero-stat-value">{{learnedCount}}</view>
+        <view class="hero-stat-label">已学</view>
+      </view>
+      <view class="hero-stat">
+        <view class="hero-stat-value">{{daysLeft}}天</view>
+        <view class="hero-stat-label">预计</view>
+      </view>
+    </view>
+
+    <view class="hero-action-band">
+      <button class="hero-start compact-start" bindtap="onStart" disabled="{{!canStart}}">
+        {{canStart ? '开始学习' : (taskDone ? '已完成' : '暂无任务')}}
+      </button>
+    </view>
+  </view>
+
+  <view class="panel today-mission">
+    <view class="section-head">
+      <text class="section-title">今日闯关</text>
+      <text class="summary-text">{{questionModes[questionModeIndex].label}}</text>
+    </view>
+    <view class="task-grid mission-grid">
+      <view class="task-card">
+        <view class="task-num">{{newCount}}</view>
+        <view class="task-label">新学</view>
+      </view>
+      <view class="task-card">
+        <view class="task-num">{{reviewCount}}</view>
+        <view class="task-label">复习</view>
+      </view>
+      <view class="task-card">
+        <view class="task-num">{{backlogCount}}</view>
+        <view class="task-label">积压</view>
+      </view>
+      <view class="task-card">
+        <view class="task-num">{{questionCount}}</view>
+        <view class="task-label">题数</view>
+      </view>
+    </view>
+    <view class="mission-progress">
+      <view class="mission-progress-fill" style="width: {{learnedCount ? 42 : 12}}%;"></view>
+    </view>
+  </view>
+
+  <view class="panel material-focus">
+    <view class="section-head">
+      <text class="section-title">当前材料</text>
+      <text class="summary-text">可在设置中切换</text>
+    </view>
+    <view class="mat-card active">
+      <view class="mat-name">
+        {{activeMaterialName}}
+        <text class="badge badge-active">学习中</text>
+      </view>
+      <view class="mat-detail">已学 {{learnedCount}} · 剩余 {{remainingCount}} · 今日新 {{newCount}} · 复 {{reviewCount}}</view>
+    </view>
+  </view>
+
+  <view class="panel settings-drawer">
+    <view class="drawer-head" bindtap="toggleSettings">
+      <view>
+        <view class="section-title">学习设置与数据</view>
+        <view class="summary-text">材料、题型、备份和重置</view>
+      </view>
+      <text class="drawer-arrow">{{showSettings ? '收起' : '展开'}}</text>
+    </view>
+
+    <view wx:if="{{showSettings}}" class="drawer-body">
+      <view class="field">
+        <text class="field-label">每天新学</text>
+        <input class="settings-input" type="number" value="{{dailyNew}}" bindinput="onDailyNewInput" />
+      </view>
+      <view class="field">
+        <text class="field-label">每天复习上限</text>
+        <input class="settings-input" type="number" value="{{dailyReview}}" bindinput="onDailyReviewInput" />
+      </view>
+      <view class="field">
+        <text class="field-label">题型</text>
+        <picker bindchange="onQuestionModeChange" value="{{questionModeIndex}}" range="{{questionModes}}" range-key="label">
+          <view class="picker-view">
+            <text>{{questionModes[questionModeIndex].label}}</text>
+            <text class="picker-arrow">▾</text>
+          </view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field-label">学习顺序</text>
+        <picker bindchange="onOrderModeChange" value="{{orderModeIndex}}" range="{{orderModes}}" range-key="label">
+          <view class="picker-view">
+            <text>{{orderModes[orderModeIndex].label}}</text>
+            <text class="picker-arrow">▾</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="field material-picker-row">
+        <text class="field-label">词汇材料</text>
+        <picker bindchange="onMaterialChange" value="{{activeMaterialIndex}}" range="{{materials}}" range-key="name">
+          <view class="picker-view">
+            <text>{{activeMaterialName}}</text>
+            <text class="picker-arrow">▾ 切换</text>
+          </view>
+        </picker>
+      </view>
+
+      <view wx:for="{{materialCards}}" wx:key="id" wx:if="{{materialCards.length > 1}}"
+            class="mat-card {{item.active ? 'active' : ''}}"
+            data-id="{{item.id}}" bindtap="onMaterialCardTap">
+        <view class="mat-name">
+          {{item.name}}
+          <text class="badge {{item.active ? 'badge-active' : 'badge-idle'}}">
+            {{item.active ? '学习中' : '待开始'}}
+          </text>
+        </view>
+        <view class="mat-detail">
+          第 {{item.studyDay}} 天 · 已学 {{item.learned}}/{{item.total}} · 今日新 {{item.todayNew}} · 复 {{item.todayReview}}
+        </view>
+      </view>
+
+      <view class="settings-actions">
+        <button class="btn-primary" bindtap="onSaveSettings">保存设置</button>
+        <button class="btn-text" bindtap="onExport">导出进度</button>
+        <button class="btn-text" bindtap="onImport">导入进度</button>
+        <button class="btn-danger" bindtap="onReset">重置进度</button>
+      </view>
+    </view>
+  </view>
+</view>
+

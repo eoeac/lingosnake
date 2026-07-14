@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/quiz/quiz",
+    "pages/complete/complete",
+    "pages/learned/learned",
+    "pages/wrong/wrong"
+  ],
+  "window": {
+    "navigationBarTitleText": "小蛇欢乐屋",
+    "navigationBarBackgroundColor": "#F5FFE9",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5FFE9"
+  },
+  "tabBar": {
+    "color": "#5D705A",
+    "selectedColor": "#12B957",
+    "backgroundColor": "#F8FFF0",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "学习首页",
+        "iconPath": "assets/home.png",
+        "selectedIconPath": "assets/home-active.png"
+      },
+      {
+        "pagePath": "pages/learned/learned",
+        "text": "学习记录",
+        "iconPath": "assets/learned.png",
+        "selectedIconPath": "assets/learned-active.png"
+      },
+      {
+        "pagePath": "pages/wrong/wrong",
+        "text": "错题本",
+        "iconPath": "assets/wrong.png",
+        "selectedIconPath": "assets/wrong-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

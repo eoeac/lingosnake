@@ -1,0 +1,27 @@
+<!-- 完成页 — 青柠玻璃风 -->
+<view class="page-container">
+
+  <view class="complete-header">
+    <view class="complete-icon">✓</view>
+    <view class="complete-title">今日学习完成</view>
+    <view class="complete-summary">{{summaryText}}</view>
+  </view>
+
+  <!-- 今日错题 -->
+  <view class="panel" wx:if="{{hasWrong}}">
+    <view class="section-title">今日错题 · {{wrongCount}} 条</view>
+    <view wx:for="{{wrongItems}}" wx:key="word" class="wrong-item">
+      <text class="wrong-word">{{item.word}}</text>
+      <text class="wrong-detail">{{item.questionType}}：选了 {{item.chosen}}，正确 {{item.correct}}</text>
+    </view>
+  </view>
+
+  <view class="panel" wx:if="{{!hasWrong}}">
+    <view class="empty" style="padding:32rpx;">全部答对！太棒了</view>
+  </view>
+
+  <view style="padding:20rpx;">
+    <button class="btn-primary" bindtap="onBackHome">返回首页</button>
+  </view>
+
+</view>
