@@ -6,7 +6,6 @@ project.private.config.json
 .agents/
 .claude/
 .codex/
-.superpowers/
 node_modules/
 *.log
 .DS_Store
