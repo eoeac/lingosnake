@@ -5,6 +5,7 @@ var quiz = require("../../core/quiz");
 var wordOrder = require("../../core/word-order");
 var sessionLock = require("../../core/session-lock");
 var materialUtil = require("../../utils/material");
+var progressFile = require("../../utils/progress-file");
 var progressExport = require("../../core/progress-export");
 
 Page({
@@ -331,55 +332,85 @@ Page({
   onExport: function () {
     app.saveState();
     var json = progressExport.buildProgressExportJson(app.globalData.appState);
-    wx.setClipboardData({
-      data: json,
+    progressFile.shareProgressJson(json, {
       success: function () {
-        wx.showToast({ title: "进度 JSON 已复制到剪贴板", icon: "none", duration: 2000 });
+        wx.showToast({ title: "JSON 文件已生成", icon: "success", duration: 1600 });
+      },
+      fail: function (error) {
+        if (error && error.stage === "share") {
+          wx.showModal({
+            title: "文件已生成",
+            content: "开发者工具不支持直接分享文件，请使用真机调试导出，或将 JSON 文件发送到微信后再导入。",
+            showCancel: false,
+          });
+          return;
+        }
+        wx.showToast({ title: "JSON 文件生成失败", icon: "none" });
       },
     });
   },
 
   onImport: function () {
     var that = this;
-    wx.showModal({
-      title: "导入进度",
-      content: "请先将进度 JSON 复制到剪贴板，然后点击确定",
-      success: function (res) {
-        if (!res.confirm) return;
-        wx.getClipboardData({
-          success: function (clip) {
-            try {
-              var parsed = progressExport.parseProgressImportJson(clip.data);
-              var normalized = materialUtil.normalizeAppState(parsed, app.globalData.materials);
-
-              app.globalData.appState = normalized;
-              var activeId = normalized.activeMaterialId || app.globalData.materials[0].id;
-              var material = app.globalData.materials.find(function (m) { return m.id === activeId; }) || app.globalData.materials[0];
-              var result = materialUtil.applyActiveMaterial(material, normalized);
-
-              app.globalData.activeMaterial = material;
-              app.globalData.baseWords = result.baseWords;
-              app.globalData.wordFormRelationMap = result.wordFormRelationMap;
-              app.globalData.wordFormWordSet = result.wordFormWordSet;
-              app.globalData.state = result.state;
-              app.globalData.plan = null;
-              app.globalData.quizQueue = [];
-              app.globalData.currentQuizIndex = 0;
-              app.globalData.currentWordResult = {};
-
-              app.saveState();
-              that.refreshAll();
-              wx.showToast({ title: "进度已导入", icon: "success" });
-            } catch (e) {
-              wx.showToast({ title: "数据格式错误，无法导入", icon: "none" });
-            }
+    progressFile.chooseProgressJson({
+      success: function (file) {
+        progressFile.readProgressJson(file.path, {
+          success: function (text) {
+            that.importProgressText(text);
           },
           fail: function () {
-            wx.showToast({ title: "无法读取剪贴板", icon: "none" });
+            wx.showToast({ title: "无法读取 JSON 文件", icon: "none" });
           },
         });
       },
+      fail: function (error) {
+        if (error && error.errMsg && /cancel/i.test(error.errMsg)) return;
+        wx.showToast({ title: "请选择 JSON 进度文件", icon: "none" });
+      },
     });
+  },
+
+  importProgressText: function (text) {
+    try {
+      var parsed = progressExport.parseProgressImportJson(text);
+      var importedMaterialIds = progressExport.getImportedMaterialIds(parsed);
+      var compatibleMaterialIds = progressExport.getCompatibleMaterialIds(parsed, app.globalData.materials);
+      if (parsed.materialStates && importedMaterialIds.length && compatibleMaterialIds.length === 0) {
+        var mismatchError = new Error("No imported material matches the current vocabulary");
+        mismatchError.code = "MATERIAL_MISMATCH";
+        throw mismatchError;
+      }
+      var normalized = materialUtil.normalizeAppState(parsed, app.globalData.materials);
+
+      app.globalData.appState = normalized;
+      var activeId = normalized.activeMaterialId || app.globalData.materials[0].id;
+      var material = app.globalData.materials.find(function (m) { return m.id === activeId; }) || app.globalData.materials[0];
+      var result = materialUtil.applyActiveMaterial(material, normalized);
+
+      app.globalData.activeMaterial = material;
+      app.globalData.baseWords = result.baseWords;
+      app.globalData.wordFormRelationMap = result.wordFormRelationMap;
+      app.globalData.wordFormWordSet = result.wordFormWordSet;
+      app.globalData.state = result.state;
+      app.globalData.plan = null;
+      app.globalData.quizQueue = [];
+      app.globalData.currentQuizIndex = 0;
+      app.globalData.currentWordResult = {};
+
+      app.saveState();
+      this.refreshAll();
+      wx.showToast({ title: "进度已导入", icon: "success" });
+    } catch (e) {
+      if (e && e.code === "MATERIAL_MISMATCH") {
+        wx.showModal({
+          title: "词库不匹配",
+          content: "这份进度来自另一套词库。请先准备相同的词库材料，再选择对应 JSON 导入。",
+          showCancel: false,
+        });
+      } else {
+        wx.showToast({ title: "JSON 格式错误，无法导入", icon: "none" });
+      }
+    }
   },
 
   /* ========== 导航 ========== */

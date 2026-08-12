@@ -24,7 +24,7 @@ const lockedState = { activeSession: { locked: true, questionMode: "mixed" } };
     },
   };
   assert.equal(hasLockedSession(unlockedState, appState), true);
-  assert.equal(canEditSessionSettings(unlockedState, appState), false);
+  assert.equal(canEditSessionSettings(unlockedState, appState), true);
 }
 
 console.log("session lock tests passed");

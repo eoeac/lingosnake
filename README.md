@@ -137,6 +137,12 @@ npm run check    # prepare data, check JavaScript syntax, and run tests
 - A client-side `.env` cannot protect a secret. API secrets must live on a server and must never be bundled into the Mini Program.
 - Only redistribute vocabulary datasets for which you have permission.
 
+### JSON Progress Files
+
+- Tap “导出 JSON” in the Mini Program settings to create `lingosnake-progress.json` and open WeChat's file sharing flow.
+- Send the exported file to your own File Transfer Assistant, then use “导入 JSON” to choose it from WeChat files.
+- WeChat DevTools does not fully simulate file sharing. Test export on a real device, and send local JSON files to a WeChat chat before importing them.
+
 ## Contributing
 
 1. Create a focused branch from `main`.

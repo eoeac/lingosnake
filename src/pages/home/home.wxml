@@ -135,8 +135,8 @@
 
       <view class="settings-actions">
         <button class="btn-primary" bindtap="onSaveSettings">保存设置</button>
-        <button class="btn-text" bindtap="onExport">导出进度</button>
-        <button class="btn-text" bindtap="onImport">导入进度</button>
+        <button class="btn-text" bindtap="onExport">导出 JSON</button>
+        <button class="btn-text" bindtap="onImport">导入 JSON</button>
         <button class="btn-danger" bindtap="onReset">重置进度</button>
       </view>
     </view>

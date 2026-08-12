@@ -36,6 +36,12 @@ const completeWxml = readFileSync(new URL("../src/pages/complete/complete.wxml",
   assert.match(miniHomeCss, /\.hero-action-band > \.hero-start\.compact-start[\s\S]*min-width:\s*100%/, "start button should override miniprogram button defaults and truly fill the band");
   assert.doesNotMatch(miniHomeCss, /\.compact-start[\s\S]*width:\s*356rpx/, "start button should not be capped to a narrow fixed width");
   assert.doesNotMatch(miniHome, /goLearned|goWrong/, "home should not duplicate tabbar destinations");
+  assert.match(miniHomeJs, /progressFile\.shareProgressJson/, "export should create a JSON file instead of using the clipboard");
+  assert.match(miniHomeJs, /progressFile\.chooseProgressJson/, "import should choose a JSON file");
+  assert.doesNotMatch(miniHomeJs, /wx\.getClipboardData|wx\.setClipboardData/, "progress transfer should not depend on the clipboard");
+  assert.match(miniHome, /导出 JSON/, "home should label the file export action clearly");
+  assert.match(miniHome, /导入 JSON/, "home should label the file import action clearly");
+  assert.match(miniHomeJs, /MATERIAL_MISMATCH/, "import should detect progress from an unavailable material");
 }
 
 {

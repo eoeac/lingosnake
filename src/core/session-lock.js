@@ -10,7 +10,8 @@ function hasLockedSession(currentState, appState) {
 }
 
 function canEditSessionSettings(currentState, appState) {
-  return !hasLockedSession(currentState, appState);
+  // Each material owns its quiz session; another material must not block this one.
+  return !isLocked(currentState);
 }
 
 function isLocked(state) {
