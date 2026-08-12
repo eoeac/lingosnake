@@ -28,7 +28,8 @@ Page({
     newCount: 0,
     reviewCount: 0,
     backlogCount: 0,
-    questionCount: 0,
+    missionSummary: "今日完成 0 / 0 个词",
+    missionProgress: 0,
     canStart: false,
     taskDone: false,
     // 材料
@@ -113,6 +114,12 @@ Page({
 
     var canStart = (plan.newWords.length + plan.reviewWords.length) > 0;
     var taskDone = canStart ? false : (plan.completedNewWords.length + plan.completedReviewWords.length) > 0;
+    var completedTaskCount = plan.completedNewWords.length + plan.completedReviewWords.length;
+    var remainingTaskCount = plan.newWords.length + plan.reviewWords.length;
+    var totalTaskCount = completedTaskCount + remainingTaskCount;
+    var missionProgress = totalTaskCount > 0
+      ? Math.round(completedTaskCount / totalTaskCount * 100)
+      : 0;
 
     this.setData({
       todayLabel: plan.date + " · 第 " + plan.studyDay + " 天 · " + g.activeMaterial.name,
@@ -130,7 +137,8 @@ Page({
       newCount: plan.newWords.length,
       reviewCount: plan.reviewWords.length,
       backlogCount: plan.backlogCount,
-      questionCount: plan.newWords.length + plan.reviewWords.length,
+      missionSummary: "今日完成 " + completedTaskCount + " / " + totalTaskCount + " 个词",
+      missionProgress: missionProgress,
       canStart: canStart,
       taskDone: taskDone,
       materials: g.materials,

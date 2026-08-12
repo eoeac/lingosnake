@@ -42,6 +42,14 @@ const completeWxml = readFileSync(new URL("../src/pages/complete/complete.wxml",
   assert.match(miniHome, /导出 JSON/, "home should label the file export action clearly");
   assert.match(miniHome, /导入 JSON/, "home should label the file import action clearly");
   assert.match(miniHomeJs, /MATERIAL_MISMATCH/, "import should detect progress from an unavailable material");
+  assert.match(miniHome, /待新学/, "today mission should label remaining new words clearly");
+  assert.match(miniHome, /待复习/, "today mission should label remaining reviews clearly");
+  assert.doesNotMatch(miniHome, /待答题/, "today mission should not duplicate the task count as a separate card");
+  assert.match(miniHomeCss, /\.mission-grid[\s\S]*repeat\(3/, "today mission should use three non-overlapping stat cards");
+  assert.doesNotMatch(miniHomeCss, /@media \(max-width: 360px\)[\s\S]*\.mission-grid[\s\S]*repeat\(2/, "narrow screens should keep the three mission cards on one row");
+  assert.match(miniHomeJs, /missionSummary/, "today mission should show completed and total task words");
+  assert.match(miniHome, /width: \{\{missionProgress\}\}%/, "today mission progress should use the real completion percentage");
+  assert.doesNotMatch(miniHome, /learnedCount \? 42 : 12/, "today mission progress should not use a fixed decorative percentage");
 }
 
 {

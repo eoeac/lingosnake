@@ -35,26 +35,23 @@
       <text class="section-title">今日闯关</text>
       <text class="summary-text">{{questionModes[questionModeIndex].label}}</text>
     </view>
+    <view class="mission-summary">{{missionSummary}}</view>
     <view class="task-grid mission-grid">
       <view class="task-card">
         <view class="task-num">{{newCount}}</view>
-        <view class="task-label">新学</view>
+        <view class="task-label">待新学</view>
       </view>
       <view class="task-card">
         <view class="task-num">{{reviewCount}}</view>
-        <view class="task-label">复习</view>
+        <view class="task-label">待复习</view>
       </view>
       <view class="task-card">
         <view class="task-num">{{backlogCount}}</view>
         <view class="task-label">积压</view>
       </view>
-      <view class="task-card">
-        <view class="task-num">{{questionCount}}</view>
-        <view class="task-label">题数</view>
-      </view>
     </view>
     <view class="mission-progress">
-      <view class="mission-progress-fill" style="width: {{learnedCount ? 42 : 12}}%;"></view>
+      <view class="mission-progress-fill" style="width: {{missionProgress}}%;"></view>
     </view>
   </view>
 

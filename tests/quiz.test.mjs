@@ -26,12 +26,8 @@ const word = {
 
 {
   const questions = buildQuestionsForTask(word, "review", QUESTION_MODES.MIXED);
-  assert.equal(questions.length, 3);
-  assert.deepEqual(questions.map((question) => question.type), [
-    QUESTION_MODES.ZH_TO_EN,
-    QUESTION_MODES.EN_TO_ZH,
-    QUESTION_MODES.PHONETIC_TO_EN,
-  ]);
+  assert.equal(questions.length, 1);
+  assert.equal(questions[0].type, QUESTION_MODES.ZH_TO_EN);
 }
 
 {

@@ -28,6 +28,26 @@ const words = Array.from({ length: 20 }, (_, i) => ({
 {
   const state = createInitialState();
   state.settings.dailyNewLimit = 5;
+  state.completedDates["2026-06-22"] = true;
+  state.studySessions["2026-06-22"] = { studyDay: 1, completed: true };
+  state.wordStates.w1 = {
+    introducedDate: "2026-06-22",
+    introducedStudyDay: 1,
+    lastSeenDate: "2026-06-22",
+    lastSeenStudyDay: 1,
+    intervalIndex: 0,
+    nextDueStudyDay: 2,
+    nextDueDate: "2026-06-23",
+    done: false,
+  };
+  const scopedWords = words.slice(1, 6);
+  const plan = buildTodayPlan(scopedWords, state, "2026-06-22");
+  assert.equal(plan.newWords.length, 5, "new-word limit should only count words in the active scope");
+}
+
+{
+  const state = createInitialState();
+  state.settings.dailyNewLimit = 5;
   state.nextNewIndex = 2;
   state.wordStates.w1 = { introducedDate: "2026-06-22", introducedStudyDay: 1 };
   state.wordStates.w10 = { introducedDate: "2026-06-22", introducedStudyDay: 1 };

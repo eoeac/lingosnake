@@ -13,8 +13,17 @@ QUESTION_LABELS[QUESTION_MODES.EN_TO_ZH] = "看英语选中文";
 QUESTION_LABELS[QUESTION_MODES.PHONETIC_TO_EN] = "看音标选单词";
 
 function buildQuestionsForTask(word, taskKind, questionMode) {
+  var mixedTypes = [
+    QUESTION_MODES.ZH_TO_EN,
+    QUESTION_MODES.EN_TO_ZH,
+    QUESTION_MODES.PHONETIC_TO_EN,
+  ];
+  var wordIndex = Number(word && word.index);
+  var mixedTypeIndex = Number.isFinite(wordIndex) && wordIndex > 0
+    ? (wordIndex - 1) % mixedTypes.length
+    : 0;
   var modes = questionMode === QUESTION_MODES.MIXED
-    ? [QUESTION_MODES.ZH_TO_EN, QUESTION_MODES.EN_TO_ZH, QUESTION_MODES.PHONETIC_TO_EN]
+    ? [mixedTypes[mixedTypeIndex]]
     : [questionMode || QUESTION_MODES.MIXED];
 
   return modes.map(function (type) {

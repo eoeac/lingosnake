@@ -159,8 +159,15 @@
 }
 
 .mission-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10rpx;
+}
+
+.mission-summary {
+  margin: -8rpx 0 18rpx;
+  color: rgba(93, 112, 90, 0.88);
+  font-size: 23rpx;
+  font-weight: 700;
 }
 
 .mission-grid .task-card {
@@ -228,10 +235,6 @@
 @media (max-width: 360px) {
   .hero-title {
     font-size: 50rpx;
-  }
-
-  .mission-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

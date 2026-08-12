@@ -84,8 +84,11 @@ function buildTodayPlan(words, rawState, todayKey) {
       completedReviewWords.push(word);
     }
   }
-  var introducedToday = Object.values(state.wordStates)
-    .filter(function (wordState) { return getIntroducedStudyDay(state, wordState) === studyDay; })
+  var introducedToday = words
+    .filter(function (word) {
+      var wordState = state.wordStates[word.id];
+      return wordState && getIntroducedStudyDay(state, wordState) === studyDay;
+    })
     .length;
   var remainingNewToday = Math.max(0, state.settings.dailyNewLimit - introducedToday);
   var newWords = [];
