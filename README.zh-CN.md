@@ -42,7 +42,13 @@ cd lingosnake
 npm run prepare
 ```
 
-在微信开发者工具中打开仓库根目录。公开的 `project.config.json` 使用 `touristappid`，并将 `miniprogramRoot` 指向 `src/`，因此不需要项目所有者的 AppID 就能编译示例版本。
+在微信开发者工具中打开仓库根目录前，先创建本地项目配置：
+
+```powershell
+Copy-Item project.example.config.json project.config.json
+```
+
+`project.example.config.json` 使用 `touristappid` 仅用于公开示例。要消除游客模式限制，请在本地 `project.config.json` 中填写你自己的真实 AppID。`project.config.json` 已被 Git 忽略，不会提交到公开仓库。
 
 运行完整本地检查：
 
@@ -127,7 +133,7 @@ npm run check    # 准备数据、检查 JavaScript 语法并运行测试
 ## 隐私与安全
 
 - 学习进度默认只保存在微信本地存储中，除非用户主动导出。
-- 不要提交个人 AppID、`project.private.config.json`、私有词库或生成数据。
+- 不要提交个人 AppID、`project.config.json`、`project.private.config.json`、私有词库或生成数据。
 - 客户端 `.env` 无法真正保护密钥；API Secret 必须保存在服务端，绝不能打包进小程序。
 - 只分发你确认拥有公开授权的词汇数据。
 

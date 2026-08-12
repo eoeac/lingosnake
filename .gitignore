@@ -1,4 +1,5 @@
 config/local.json
+project.config.json
 private/
 src/data/generated/
 project.private.config.json

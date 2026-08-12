@@ -42,7 +42,13 @@ cd lingosnake
 npm run prepare
 ```
 
-Open the repository root in WeChat Developer Tools. The committed `project.config.json` uses `touristappid` and points `miniprogramRoot` to `src/`, so the public sample can be compiled without the owner's AppID.
+Before opening the repository root in WeChat Developer Tools, create a local project configuration:
+
+```powershell
+Copy-Item project.example.config.json project.config.json
+```
+
+`project.example.config.json` uses `touristappid` for the public sample only. To remove tourist-mode restrictions, replace it with your own AppID in the local `project.config.json`. The local file is ignored by Git and will never be committed to the public repository.
 
 Run the complete local verification:
 
@@ -127,7 +133,7 @@ npm run check    # prepare data, check JavaScript syntax, and run tests
 ## Privacy And Security
 
 - Learning progress stays in local WeChat storage unless the user exports it.
-- Do not commit a personal AppID, `project.private.config.json`, private vocabulary, or generated materials.
+- Do not commit a personal AppID, `project.config.json`, `project.private.config.json`, private vocabulary, or generated materials.
 - A client-side `.env` cannot protect a secret. API secrets must live on a server and must never be bundled into the Mini Program.
 - Only redistribute vocabulary datasets for which you have permission.
 

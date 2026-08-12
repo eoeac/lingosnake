@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { dirname, resolve } from "node:path";
 
 const rootDir = resolve(import.meta.dirname, "..");
@@ -9,6 +10,7 @@ const requiredFiles = [
   "src/assets/app-avatar.png",
   "src/utils/material.js",
   "src/data/generated/materials.js",
+  "project.example.config.json",
 ];
 
 const obsoletePaths = [
@@ -49,10 +51,17 @@ assert.match(materialSource, /\.\.\/data\/generated\/materials/);
 assert.doesNotMatch(materialSource, /上海初中英语/);
 assert.doesNotMatch(materialSource, /vocab-data/);
 
-const projectConfig = JSON.parse(readFileSync(resolve(rootDir, "project.config.json"), "utf8"));
-assert.equal(projectConfig.miniprogramRoot, "src/");
-assert.equal(projectConfig.appid, "touristappid");
-assert.equal(projectConfig.projectname, "lingosnake");
+const projectExampleConfig = JSON.parse(readFileSync(resolve(rootDir, "project.example.config.json"), "utf8"));
+assert.equal(projectExampleConfig.miniprogramRoot, "src/");
+assert.equal(projectExampleConfig.appid, "touristappid");
+assert.equal(projectExampleConfig.projectname, "lingosnake");
+
+const gitIgnore = readFileSync(resolve(rootDir, ".gitignore"), "utf8");
+assert.match(gitIgnore, /(?:^|\r?\n)project\.config\.json(?:\r?\n|$)/);
+assert.throws(
+  () => execFileSync("git", ["ls-files", "--error-unmatch", "project.config.json"], { cwd: rootDir, stdio: "pipe" }),
+  "project.config.json must not be tracked",
+);
 
 const packageJson = JSON.parse(readFileSync(resolve(rootDir, "package.json"), "utf8"));
 assert.equal(packageJson.dependencies, undefined);
@@ -73,6 +82,8 @@ for (const [name, content] of [["README.md", readmeEn], ["README.zh-CN.md", read
   assert.match(content, /npm run prepare/, `${name} should document data preparation`);
   assert.match(content, /npm run check/, `${name} should document verification`);
   assert.match(content, /touristappid/, `${name} should document the public AppID`);
+  assert.match(content, /project\.example\.config\.json/, `${name} should document local project config setup`);
+  assert.match(content, /project\.config\.json/, `${name} should document ignored local project config`);
   assert.match(content, /private\/vocabulary/, `${name} should document private vocabulary storage`);
   assert.match(content, /MIT/, `${name} should document the license`);
   assert.match(content, /Taro/, `${name} should document the multi-platform direction`);
